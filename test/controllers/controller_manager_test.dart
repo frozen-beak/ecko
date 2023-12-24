@@ -21,7 +21,7 @@ void main() {
 
     setUp(() {
       Paw.init(shouldPrintLogs: false);
-      
+
       manager = TestEchoControllerManager();
     });
 
