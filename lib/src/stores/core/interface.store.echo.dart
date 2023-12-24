@@ -1,4 +1,4 @@
-import '../core/manager.store.echo.dart';
+import 'manager.store.echo.dart';
 
 ///
 /// Interface representing a store in echo
@@ -6,15 +6,15 @@ import '../core/manager.store.echo.dart';
 /// This interface provides barbon's for creating various stores in echo, to manage
 /// states using various strategies
 ///
-/// It uses [EchoStoreManager] internally for dependency management
+/// It uses [StoreManager] internally for dependency management
 ///
 /// GenericType [T] Represents the type of state managed by the store.
 ///
-abstract class EchoStoreInterface<T> {
+abstract class StoreInterface<T> {
   ///
   /// The store manager instance for managing dependencies and store updates.
   ///
-  final EchoStoreManager _echoStore = EchoStoreManager();
+  final StoreManager _storeManager = StoreManager();
 
   ///
   /// Internal cached state of the store to allow rapid access to store's state
@@ -30,14 +30,14 @@ abstract class EchoStoreInterface<T> {
   T Function(T value)? _updateCallback;
 
   ///
-  /// Constructs an instance of [EchoStoreInterface] and registers it with the
+  /// Constructs an instance of [StoreInterface] and registers it with the
   /// store manager.
   ///
   /// [state] - Initial state of the store.
   ///
   /// [updateCallback] - Optional callback for state updates, can also be set later
   ///
-  EchoStoreInterface(
+  StoreInterface(
     this._state, {
     T Function(T value)? updateCallback,
   }) {
@@ -45,7 +45,7 @@ abstract class EchoStoreInterface<T> {
     _updateCallback = updateCallback;
 
     // create a root node in directed graph to allow existence of dependent stores
-    _echoStore.createRootNode(this);
+    _storeManager.createRootNode(this);
   }
 
   ///
@@ -63,7 +63,7 @@ abstract class EchoStoreInterface<T> {
     _state = newState;
 
     // update dependent store nodes (if any)
-    _echoStore.updateStoreNodes(this);
+    _storeManager.updateStoreNodes(this);
   }
 
   ///
@@ -86,7 +86,7 @@ abstract class EchoStoreInterface<T> {
   /// implemented by subclasses to dispose any streams, objects, etc.
   ///
   void dispose() {
-    _echoStore.deleteRoot(this);
+    _storeManager.deleteRoot(this);
   }
 
   ///
@@ -123,8 +123,8 @@ abstract class EchoStoreInterface<T> {
   /// counterStore.addDependency(listStore);
   /// ```
   ///
-  void addDependency(EchoStoreInterface store) {
-    _echoStore.addDependency(this, store);
+  void addDependency(StoreInterface store) {
+    _storeManager.addDependency(this, store);
   }
 
   ///
@@ -143,8 +143,8 @@ abstract class EchoStoreInterface<T> {
   /// counterStore.removeDependency(listStore);
   /// ```
   ///
-  void removeDependency(EchoStoreInterface store) {
-    _echoStore.removeDependency(this, store);
+  void removeDependency(StoreInterface store) {
+    _storeManager.removeDependency(this, store);
   }
 
   ///

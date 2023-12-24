@@ -1,55 +1,55 @@
 import 'package:flutter/widgets.dart';
 
-import '../builders/value_builder.store.echo.dart';
-import '../features/value_store.store.echo.dart';
+import '../store_builder.store.echo.dart';
+import '../store_impl.store.echo.dart';
 
 ///
-/// An abstract widget that simplifies the management of a [ValueStore] within
+/// An abstract widget that simplifies the management of a [Store] within
 /// a [StatefulWidget].
 ///
 /// This widget abstracts the creation, initialization, and disposal of a
-/// [ValueStore], allowing developers to focus on building their UI and reacting to state changes.
+/// [Store], allowing developers to focus on building their UI and reacting to state changes.
 ///
-/// GenericType [T]: Represents the type of the value managed by the [ValueStore].
+/// GenericType [T]: Represents the type of the value managed by the [Store].
 ///
 /// Usage:
 ///
-/// Extend this class to create a stateful widget that has its own [ValueStore].
+/// Extend this class to create a stateful widget that has its own [Store].
 /// Implement the `build` method to define the UI and use the provided `state`
 /// value. You can also override `onInit` and `onDispose` for additional setup
 /// and teardown tasks.
 ///
 /// Example:
 /// ```
-/// class MyCounterWidget extends ValueStateWidget<int> {
+/// class MyCounterWidget extends StoreStateWidget<int> {
 ///   MyCounterWidget({required int initialCount}) : super(state: initialCount);
 ///
 ///   @override
 ///   Widget build(BuildContext context, int state) {
 ///     return ElevatedButton(
 ///       child: Text('Count: $state'),
-///       onPressed: () => valueStore.update((value) => value + 1),
+///       onPressed: () => store.update((value) => value + 1),
 ///     );
 ///   }
 /// }
 /// ```
 ///
-/// In this example, `MyCounterWidget` extends `ValueStateWidget<int>`, managing an integer state.
+/// In this example, `MyCounterWidget` extends `StoreStateWidget<int>`, managing an integer state.
 /// The `build` method creates an `ElevatedButton` that displays the current count and increments it
 /// when pressed.
 ///
-abstract class ValueStateWidget<T> extends StatefulWidget {
+abstract class StoreStateWidget<T> extends StatefulWidget {
   /// The initial state of the widget.
   final T state;
 
-  /// The [ValueStore] that holds and manages the state of the widget.
-  late final ValueStore<T> valueStore;
+  /// The [Store] that holds and manages the state of the widget.
+  late final Store<T> store;
 
-  ValueStateWidget({
+  StoreStateWidget({
     required this.state,
     Key? key,
   }) : super(key: key) {
-    valueStore = ValueStore<T>(state);
+    store = Store<T>(state);
   }
 
   ///
@@ -74,10 +74,10 @@ abstract class ValueStateWidget<T> extends StatefulWidget {
   void onDispose() {}
 
   @override
-  ValueStateWidgetState createState() => ValueStateWidgetState();
+  StoreStateWidgetState createState() => StoreStateWidgetState();
 }
 
-class ValueStateWidgetState<T> extends State<ValueStateWidget> {
+class StoreStateWidgetState<T> extends State<StoreStateWidget> {
   @override
   void initState() {
     super.initState();
@@ -87,14 +87,14 @@ class ValueStateWidgetState<T> extends State<ValueStateWidget> {
   @override
   void dispose() {
     widget.onDispose();
-    widget.valueStore.dispose();
+    widget.store.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return ValueBuilder<T>(
-      store: widget.valueStore as ValueStore<T>,
+    return StoreBuilder<T>(
+      store: widget.store as Store<T>,
       widget: (ctx, state) => widget.build(ctx, state),
     );
   }

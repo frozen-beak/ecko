@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:paw/paw.dart';
 
-import '../interface/store_interface.store.echo.dart';
+import 'core/interface.store.echo.dart';
 
 ///
-/// A specialized implementation of [EchoStoreInterface] for managing and updating
+/// A specialized implementation of [StoreInterface] for managing and updating
 /// single object states such as primitives, custom objects, etc.
 ///
-/// Extends the capabilities of [EchoStoreInterface] by leveraging [ValueNotifier]
+/// Extends the capabilities of [StoreInterface] by leveraging [ValueNotifier]
 /// for reactive state updates and lifecycle logging.
 ///
 /// This store is ideal for simpler, single-value states, providing a [ValueNotifier]
@@ -21,7 +21,7 @@ import '../interface/store_interface.store.echo.dart';
 /// final counterStore = ValueStore<int>(0);
 /// ```
 ///
-class ValueStore<T> extends EchoStoreInterface<T> {
+class Store<T> extends StoreInterface<T> with ChangeNotifier {
   ///
   /// Instance of logger.
   ///
@@ -33,7 +33,7 @@ class ValueStore<T> extends EchoStoreInterface<T> {
   late final ValueNotifier<T> _valueNotifier;
 
   ///
-  /// Constructor for [ValueStore].
+  /// Constructor for [Store].
   ///
   /// Initializes the store with an initial state and an optional update callback.
   /// It sets up a [ValueNotifier] to notify listeners of state changes.
@@ -41,7 +41,7 @@ class ValueStore<T> extends EchoStoreInterface<T> {
   /// [state]: The initial state of the store.
   /// [updateCallback]: Optional callback for state updates.
   ///
-  ValueStore(T state, {T Function(T value)? updateCallback})
+  Store(T state, {T Function(T value)? updateCallback})
       : super(
           state,
           updateCallback: updateCallback,
@@ -66,6 +66,15 @@ class ValueStore<T> extends EchoStoreInterface<T> {
 
     // Update the ValueNotifier with the new state.
     _valueNotifier.value = super.state;
+
+    // Check if T is not int, double, String or bool
+    if (!(newState is int ||
+        newState is double ||
+        newState is String ||
+        newState is bool)) {
+      // notify only if [T] is object, map, list, etc.
+      _valueNotifier.notifyListeners();
+    }
   }
 
   @override

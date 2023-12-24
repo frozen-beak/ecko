@@ -1,7 +1,7 @@
 import 'package:paw/paw.dart';
 
 import '../../utils/graph.util.echo.dart';
-import '../interface/store_interface.store.echo.dart';
+import 'interface.store.echo.dart';
 
 ///
 /// A singleton class for managing interdependencies between stores in echo
@@ -10,28 +10,28 @@ import '../interface/store_interface.store.echo.dart';
 /// It allows for the creation and deletion of root nodes (stores) in the graph and
 /// manages dependencies between these stores, ensuring that updates are propagated correctly.
 ///
-class EchoStoreManager {
+class StoreManager {
   ///
   /// Instance of logger to help logging useful message to the dev
   ///
   final _paw = Paw();
 
   ///
-  /// Private, Static & Singleton instance of [EchoStoreManager]
+  /// Private, Static & Singleton instance of [StoreManager]
   ///
-  static EchoStoreManager? _instance;
+  static StoreManager? _instance;
 
   ///
   /// Private constructor to prevent outside invocations
   ///
-  EchoStoreManager._();
+  StoreManager._();
 
   ///
   /// Factory constructor to get the singleton instance.
   ///
   /// Throws an exception if the manager is not initialized.
   ///
-  factory EchoStoreManager() {
+  factory StoreManager() {
     if (_instance == null) {
       throw Exception(
         "`Echo` is not yet initialised, initialise it with `Echo.init()`",
@@ -51,8 +51,8 @@ class EchoStoreManager {
   /// EchoStoreManager.init();
   /// ```
   ///
-  static EchoStoreManager init() {
-    _instance ??= EchoStoreManager._();
+  static StoreManager init() {
+    _instance ??= StoreManager._();
 
     return _instance!;
   }
@@ -75,7 +75,7 @@ class EchoStoreManager {
   /// EchoStoreManager().createRootNode(store);
   /// ```
   ///
-  void createRootNode(EchoStoreInterface root) {
+  void createRootNode(StoreInterface root) {
     _graph.createRoot(root);
   }
 
@@ -91,7 +91,7 @@ class EchoStoreManager {
   /// EchoStoreManager().deleteRoot(store);
   /// ```
   ///
-  void deleteRoot(EchoStoreInterface root) {
+  void deleteRoot(StoreInterface root) {
     _graph.deleteRoot(root);
   }
 
@@ -109,7 +109,7 @@ class EchoStoreManager {
   /// EchoStoreManager().addDependency(rootStore, dependentStore);
   /// ```
   ///
-  void addDependency(EchoStoreInterface root, EchoStoreInterface node) {
+  void addDependency(StoreInterface root, StoreInterface node) {
     // if node is added successfully then log a message to inform the dev
     if (_graph.addNode(root, node)) {
       _paw.info(
@@ -146,7 +146,7 @@ class EchoStoreManager {
   /// EchoStoreManager().removeDependency(rootStore, dependentStore);
   /// ```
   ///
-  void removeDependency(EchoStoreInterface root, EchoStoreInterface node) {
+  void removeDependency(StoreInterface root, StoreInterface node) {
     // if node is removed successfully then log a message to inform the dev
     if (_graph.removeNode(root, node)) {
       _paw.info(
@@ -193,7 +193,7 @@ class EchoStoreManager {
   /// EchoStoreManager().updateStoreNodes(store);
   /// ```
   ///
-  void updateStoreNodes(EchoStoreInterface root) {
+  void updateStoreNodes(StoreInterface root) {
     final dependencies = _graph.getNodes(root);
 
     // no dependant stores were found
