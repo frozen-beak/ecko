@@ -5,8 +5,12 @@ void main() {
   group('[Utils] EchoGraph Tests', () {
     late EchoGraph<MockStore> graph;
 
-    setUp(() {
+    setUpAll(() {
       graph = EchoGraph<MockStore>();
+    });
+
+    setUp(() {
+      graph.clearGraph();
     });
 
     test(
@@ -25,33 +29,34 @@ void main() {
       },
     );
 
-    test('[addNode] Adding a node to an undefined root should return false',
-        () {
+    test('[addNode] Adding a node to an undefined root should return null', () {
       final root = MockStore('root');
       final dependent = MockStore('dependent');
 
-      expect(graph.addNode(root, dependent), isFalse);
+      expect(graph.addNode(root, dependent), isNull);
     });
 
     test(
-        '[createRoot] Removing a non-existent node from a root should return false',
-        () {
-      final root = MockStore('root');
-      final dependent = MockStore('dependent');
+      '[removeNode] Removing a non-existent node from a root should return false',
+      () {
+        final root = MockStore('root');
+        final dependent = MockStore('dependent');
 
-      graph.createRoot(root);
+        graph.createRoot(root);
 
-      expect(graph.removeNode(root, dependent), isFalse);
-    });
+        expect(graph.removeNode(root, dependent), isFalse);
+      },
+    );
 
     test(
-        '[removeNode] Removing a node from a non-existent root should return false',
-        () {
-      final root = MockStore('root');
-      final dependent = MockStore('dependent');
+      '[removeNode] Removing a node from a non-existent root should return null',
+      () {
+        final root = MockStore('root');
+        final dependent = MockStore('dependent');
 
-      expect(graph.removeNode(root, dependent), isFalse);
-    });
+        expect(graph.removeNode(root, dependent), isNull);
+      },
+    );
 
     test('[deleteRoot] Deleting a non-existent root should return false', () {
       final root = MockStore('root');
@@ -132,6 +137,9 @@ class MockStore {
   ///
   final String name;
 
+  ///
+  /// Public constructor for [MockStore]
+  ///
   MockStore(this.name);
 
   @override

@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:paw/paw.dart';
+
 import 'package:echo/echo.dart';
 
 void main() {
-  setUp(() {
-    Paw.init(shouldPrintLogs: false);
-
+  setUpAll(() {
     Echo.init(printLogs: false);
   });
 

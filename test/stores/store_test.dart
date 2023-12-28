@@ -1,11 +1,9 @@
 import 'package:echo/echo.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:paw/paw.dart';
 
 void main() {
   group('Store Tests', () {
-    setUp(() {
-      Paw.init(shouldPrintLogs: false);
+    setUpAll(() {
       Echo.init(printLogs: false);
     });
 

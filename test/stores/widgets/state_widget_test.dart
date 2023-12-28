@@ -1,7 +1,7 @@
-import 'package:echo/echo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:paw/paw.dart';
+
+import 'package:echo/echo.dart';
 
 // A test widget to implement StoreStateWidget for testing
 class TestWidget extends StoreStateWidget<int> {
@@ -23,9 +23,7 @@ class TestWidget extends StoreStateWidget<int> {
 }
 
 void main() {
-  setUp(() {
-    Paw.init(shouldPrintLogs: false);
-
+  setUpAll(() {
     Echo.init(printLogs: false);
   });
 
