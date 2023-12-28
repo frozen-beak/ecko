@@ -1,7 +1,6 @@
-import 'package:paw/paw.dart';
-
 import 'controllers/manager.controller.echo.dart';
 import 'stores/core/manager.store.echo.dart';
+import 'utils/logger.util.echo.dart';
 
 ///
 /// [Echo] is the central class of the library, responsible for initializing and
@@ -19,7 +18,7 @@ import 'stores/core/manager.store.echo.dart';
 ///   Echo.init(printLogs: true);
 ///
 ///   // Access the Echo instance.
-///   var echo = Echo();
+///   final echo = Echo();
 ///
 ///   // Use echo to manage controllers, stores, etc.
 ///   // ...
@@ -37,7 +36,9 @@ class Echo with EchoControllerManagerMixin {
   ///
   static Echo? _instance;
 
-  // Private constructor for the Singleton pattern.
+  ///
+  /// Private constructor for the Singleton pattern.
+  ///
   Echo._({required this.printLogs});
 
   ///
@@ -77,18 +78,12 @@ class Echo with EchoControllerManagerMixin {
   ///
   static Echo init({bool printLogs = true}) {
     if (_instance == null) {
+      // Initialize singleton custom logger
+      EchoLogger.init(shouldPrintLogs: printLogs);
+
       _instance = Echo._(printLogs: printLogs);
 
-      // Initialize the Paw logging system.
-      Paw.init(
-        name: "echo",
-        maxStackTraces: 3,
-        shouldPrintName: true,
-        shouldPrintLogs: printLogs,
-        shouldIncludeSourceInfo: false,
-      );
-
-      Paw().info("Echo has been initialised");
+      EchoLogger().info("Echo has been initialised");
 
       // Initialize the store manager.
       StoreManager.init();

@@ -11,7 +11,8 @@
 ///
 /// Example:
 /// ```
-/// var graph = EchoGraph<String>();
+/// final graph = EchoGraph<String>();
+///
 /// graph.createRoot('rootNode');
 /// graph.addNode('rootNode', 'dependentNode');
 /// ```
@@ -35,7 +36,7 @@ class EchoGraph<T> {
   ///
   /// Example:
   /// ```
-  /// var dependents = graph.getNodes('rootNode');
+  /// final dependents = graph.getNodes('rootNode');
   /// ```
   ///
   Set<T>? getNodes(T root) {
@@ -47,13 +48,19 @@ class EchoGraph<T> {
   ///
   /// This method creates a new root node if it does not already exist.
   ///
+  /// Returns `true` if new root is created and `false` if root already exists
+  ///
   /// Example:
   /// ```
-  /// graph.createRoot('newRootNode');
+  /// final isCreated = graph.createRoot('newRootNode');
   /// ```
   ///
-  void createRoot(T root) {
-    _graph[root] ??= {};
+  bool createRoot(T root) {
+    if (_graph[root] != null) return false;
+
+    _graph[root] = <T>{};
+
+    return true;
   }
 
   ///
@@ -75,13 +82,19 @@ class EchoGraph<T> {
   ///
   /// Returns `true` if the node was added, `false` if the root node does not exist.
   ///
+  /// Returns `null` if root node does not exists
+  ///
   /// Example:
   /// ```
   /// bool isAdded = graph.addNode('rootNode', 'dependentNode');
   /// ```
   ///
-  bool addNode(T root, T node) {
-    return _graph[root]?.add(node) ?? false;
+  bool? addNode(T root, T node) {
+    final rootNode = _graph[root];
+
+    if (rootNode == null) return null;
+
+    return rootNode.add(node);
   }
 
   ///
@@ -90,12 +103,30 @@ class EchoGraph<T> {
   /// Returns `true` if the node was removed, `false` if the root node does not exist or
   /// the node was not a dependency.
   ///
+  /// Returns `null` if root node does not exists
+  ///
   /// Example:
   /// ```
   /// bool isRemoved = graph.removeNode('rootNode', 'dependentNode');
   /// ```
   ///
-  bool removeNode(T root, T node) {
-    return _graph[root]?.remove(node) ?? false;
+  bool? removeNode(T root, T node) {
+    final rootNode = _graph[root];
+
+    if (rootNode == null) return null;
+
+    return rootNode.remove(node);
+  }
+
+  ///
+  /// Clears the graph by removing all roots and nodes.
+  ///
+  /// Example:
+  /// ```
+  /// graph.clearGraph();
+  /// ```
+  ///
+  void clearGraph() {
+    _graph.clear();
   }
 }

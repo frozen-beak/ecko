@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:paw/paw.dart';
 
+import '../utils/logger.util.echo.dart';
 import 'core/interface.store.echo.dart';
 
 ///
@@ -25,7 +25,7 @@ class Store<T> extends StoreInterface<T> with ChangeNotifier {
   ///
   /// Instance of logger.
   ///
-  final _paw = Paw();
+  final _logger = EchoLogger();
 
   ///
   /// ValueNotifier for reactive updates to the state.
@@ -49,7 +49,7 @@ class Store<T> extends StoreInterface<T> with ChangeNotifier {
     // init the valueNotifier with cached state
     _valueNotifier = ValueNotifier<T>(super.state);
 
-    _paw.info("Created ${toString()} - $hashCode");
+    _logger.info("Created ${toString()} - $hashCode");
   }
 
   ///
@@ -85,7 +85,7 @@ class Store<T> extends StoreInterface<T> with ChangeNotifier {
     // Call the dispose method of the base class.
     super.dispose();
 
-    _paw.info("Disposed ${toString()} - $hashCode");
+    _logger.info("Disposed ${toString()} - $hashCode");
   }
 
   ///

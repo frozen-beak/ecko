@@ -1,4 +1,9 @@
+///
+/// Library to group [EchoController] exports
+///
 library controller;
 
-// controller interface
+///
+/// [EchoController] interface to help implement controllers
+///
 export './interface.controller.echo.dart';

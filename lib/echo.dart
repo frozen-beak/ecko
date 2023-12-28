@@ -1,10 +1,19 @@
+///
+/// Library to export [Echo] interfaces, stores & widgets
+///
 library echo;
 
-// export stores
+///
+/// Export stores related files
+///
 export './src/stores/export.store.echo.dart';
 
-// controller
+///
+/// Export controllers related files
+///
 export './src/controllers/export.controller.echo.dart';
 
-// brain
+///
+/// Export echo's brain to help manage everything with one object
+///
 export './src/brain.echo.dart';

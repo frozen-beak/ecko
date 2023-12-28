@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
-import 'package:paw/paw.dart';
+import '../utils/hash.util.echo.dart';
+import '../utils/logger.util.echo.dart';
 import 'interface.controller.echo.dart';
 
 ///
@@ -16,12 +16,12 @@ mixin EchoControllerManagerMixin {
   ///
   /// A private instance of the Paw logger for logging purposes.
   ///
-  final Paw _paw = Paw();
+  final EchoLogger _logger = EchoLogger();
 
   ///
   /// A map to store the active EchoController instances, keyed by their GlobalKey.
   ///
-  final Map<Key, EchoController> _controllers = {};
+  final Map<int, EchoController> _controllers = {};
 
   ///
   /// Puts (or retrieves) a controller of type [T] into the controllers map.
@@ -44,21 +44,29 @@ mixin EchoControllerManagerMixin {
   /// ```
   ///
   T put<T extends EchoController>(T Function() create) {
-    final controller = create();
-    final key = controller.key;
+    final key = EchoHashUtil.generateTypeHash<T>();
 
-    if (_controllers.containsKey(key)) {
-      _paw.info("Fetched already created $controller:${key.hashCode}");
-      return _controllers[key] as T;
+    var controller = _controllers[key];
+
+    if (controller != null) {
+      _logger.info(
+        "Fetched already created instance of $controller:$key",
+      );
+
+      return controller as T;
     }
 
+    // if not already present, create a new controller
+    controller = create();
+
+    // add controller in the map
     _controllers[key] = controller;
 
     controller.onInit();
 
-    _paw.info("Created $controller:${key.hashCode}");
+    _logger.info("Created $controller:$key");
 
-    return controller;
+    return controller as T;
   }
 
   ///
@@ -74,14 +82,16 @@ mixin EchoControllerManagerMixin {
   /// class MyController extends EchoController {}
   ///
   /// final manager = EchoControllerManagerMixin();
+  ///
+  /// // put your controller on memory
   /// final myController = manager.put(() => MyController());
   ///
   /// // Later, when the controller is no longer needed:
-  /// manager.delete(myController);
+  /// manager.delete<MyController>();
   /// ```
   ///
-  void delete(EchoController controller) {
-    final key = controller.key;
+  bool delete<T>() {
+    final key = EchoHashUtil.generateTypeHash<T>();
     final ctrl = _controllers[key];
 
     if (ctrl != null) {
@@ -89,13 +99,15 @@ mixin EchoControllerManagerMixin {
 
       _controllers.remove(key);
 
-      _paw.info("$controller:${key.hashCode} has been deleted");
-      return;
+      _logger.info("$ctrl:$key has been deleted");
+      return true;
     }
 
-    _paw.error(
+    _logger.error(
       "Error occurred while deleting the controller",
-      error: Exception("$controller:${key.hashCode} not found"),
+      error: Exception("Controller with id $key not found"),
     );
+
+    return false;
   }
 }
