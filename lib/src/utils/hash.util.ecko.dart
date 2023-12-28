@@ -1,7 +1,7 @@
 ///
-/// Utility class for working with hashes in Echo.
+/// Utility class for working with hashes in Ecko.
 ///
-class EchoHashUtil {
+class EckoHashUtil {
   ///
   /// Generates a unique hash code for the given type [T].
   ///
@@ -14,7 +14,7 @@ class EchoHashUtil {
   ///
   /// Example:
   /// ```
-  /// int hashForMyClass = EchoHashUtil.generateTypeHash<MyClass>();
+  /// int hashForMyClass = EckoHashUtil.generateTypeHash<MyClass>();
   ///
   /// print(hashForMyClass); // Outputs a unique integer hash code for MyClass.
   /// ```

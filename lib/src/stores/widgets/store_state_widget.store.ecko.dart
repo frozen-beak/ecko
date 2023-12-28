@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
 
-import '../store_builder.store.echo.dart';
-import '../store_impl.store.echo.dart';
+import '../store_builder.store.ecko.dart';
+import '../store_impl.store.ecko.dart';
 
 ///
 /// An abstract widget that simplifies the management of a [Store] within

@@ -1,10 +1,10 @@
-import 'package:echo/echo.dart';
+import 'package:ecko/ecko.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   group('Store Tests', () {
     setUpAll(() {
-      Echo.init(printLogs: false);
+      Ecko.init(printLogs: false);
     });
 
     test('Initializes with correct state', () {

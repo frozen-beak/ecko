@@ -1,12 +1,12 @@
 ///
-/// [EchoController] is an abstract class that serves as a base for custom controllers
-/// in the Echo state management library for Flutter. This class provides a structured
+/// [EckoController] is an abstract class that serves as a base for custom controllers
+/// in the Ecko state management library for Flutter. This class provides a structured
 /// way to handle lifecycle events and associate a GlobalKey with each controller instance.
 ///
 /// The class is designed to be extended by concrete implementations that define specific
 /// behaviors and logic for different parts of your application.
 ///
-abstract class EchoController {
+abstract class EckoController {
   ///
   /// [onInit] is called immediately after the controller is instantiated.
   ///

@@ -1,6 +1,6 @@
 ///
-/// EchoGraph is a utility class designed for managing relations
-/// between stores in echo
+/// EckoGraph is a utility class designed for managing relations
+/// between stores in ecko
 ///
 /// Each node in this graph represents a store, and the edges
 /// represent dependencies between these stores. The class provides methods
@@ -11,22 +11,22 @@
 ///
 /// Example:
 /// ```
-/// final graph = EchoGraph<String>();
+/// final graph = EckoGraph<String>();
 ///
 /// graph.createRoot('rootNode');
 /// graph.addNode('rootNode', 'dependentNode');
 /// ```
 ///
-class EchoGraph<T> {
+class EckoGraph<T> {
   ///
   /// A map to hold key-value pairs of stores and dependent stores
   ///
   final Map<T, Set<T>> _graph;
 
   ///
-  /// Constructor for EchoGraph which initializes the underlying [_graph]
+  /// Constructor for EckoGraph which initializes the underlying [_graph]
   ///
-  EchoGraph() : _graph = {};
+  EckoGraph() : _graph = {};
 
   ///
   /// Fetches the dependent nodes for a given root node.

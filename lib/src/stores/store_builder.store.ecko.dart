@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'store_impl.store.echo.dart';
+import 'store_impl.store.ecko.dart';
 
 ///
 /// A widget that listens to a [Store] and rebuilds its child when the store's value changes.

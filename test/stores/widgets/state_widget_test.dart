@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:echo/echo.dart';
+import 'package:ecko/ecko.dart';
 
 // A test widget to implement StoreStateWidget for testing
 class TestWidget extends StoreStateWidget<int> {
@@ -24,7 +24,7 @@ class TestWidget extends StoreStateWidget<int> {
 
 void main() {
   setUpAll(() {
-    Echo.init(printLogs: false);
+    Ecko.init(printLogs: false);
   });
 
   testWidgets(

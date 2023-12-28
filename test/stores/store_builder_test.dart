@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:echo/echo.dart';
+import 'package:ecko/ecko.dart';
 
 void main() {
   setUpAll(() {
-    Echo.init(printLogs: false);
+    Ecko.init(printLogs: false);
   });
 
   testWidgets(

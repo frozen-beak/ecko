@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../utils/logger.util.echo.dart';
-import 'core/interface.store.echo.dart';
+import '../utils/logger.util.ecko.dart';
+import 'core/interface.store.ecko.dart';
 
 ///
 /// A specialized implementation of [StoreInterface] for managing and updating
@@ -25,7 +25,7 @@ class Store<T> extends StoreInterface<T> with ChangeNotifier {
   ///
   /// Instance of logger.
   ///
-  final _logger = EchoLogger();
+  final _logger = EckoLogger();
 
   ///
   /// ValueNotifier for reactive updates to the state.

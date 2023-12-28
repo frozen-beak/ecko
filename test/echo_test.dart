@@ -1,20 +1,20 @@
-import 'package:echo/echo.dart';
+import 'package:ecko/ecko.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  group('Echo Tests', () {
+  group('Ecko Tests', () {
     test('Throws exception if accessed before initialization', () {
-      expect(() => Echo(), throwsException);
+      expect(() => Ecko(), throwsException);
     });
 
-    test('Echo is a Singleton', () {
-      Echo.init(printLogs: false);
+    test('Ecko is a Singleton', () {
+      Ecko.init(printLogs: false);
 
-      final echo1 = Echo();
-      final echo2 = Echo();
+      final ecko1 = Ecko();
+      final ecko2 = Ecko();
 
       // Check if both variables hold the same instance or not
-      expect(identical(echo1, echo2), isTrue);
+      expect(identical(ecko1, ecko2), isTrue);
     });
   });
 }

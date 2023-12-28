@@ -1,6 +1,6 @@
-import 'package:echo/src/stores/core/manager.store.echo.dart';
-import 'package:echo/src/stores/store_impl.store.echo.dart';
-import 'package:echo/src/utils/logger.util.echo.dart';
+import 'package:ecko/src/stores/core/manager.store.ecko.dart';
+import 'package:ecko/src/stores/store_impl.store.ecko.dart';
+import 'package:ecko/src/utils/logger.util.ecko.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
@@ -10,8 +10,8 @@ void main() {
     late Store dependentStore;
 
     setUpAll(() {
-      EchoLogger.init(shouldPrintLogs: false);
-      
+      EckoLogger.init(shouldPrintLogs: false);
+
       storeManager = StoreManager.init();
 
       rootStore = Store(1);

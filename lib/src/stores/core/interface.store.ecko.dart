@@ -1,9 +1,9 @@
-import 'manager.store.echo.dart';
+import 'manager.store.ecko.dart';
 
 ///
-/// Interface representing a store in echo
+/// Interface representing a store in ecko
 ///
-/// This interface provides barbon's for creating various stores in echo, to manage
+/// This interface provides barbon's for creating various stores in ecko, to manage
 /// states using various strategies
 ///
 /// It uses [StoreManager] internally for dependency management

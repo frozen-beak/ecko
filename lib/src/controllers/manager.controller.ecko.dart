@@ -1,27 +1,27 @@
-import '../utils/hash.util.echo.dart';
-import '../utils/logger.util.echo.dart';
-import 'interface.controller.echo.dart';
+import '../utils/hash.util.ecko.dart';
+import '../utils/logger.util.ecko.dart';
+import 'interface.controller.ecko.dart';
 
 ///
-/// [EchoControllerManagerMixin] is a mixin that provides functionality to manage
-/// EchoControllers within the Echo state management framework
+/// [EckoControllerManagerMixin] is a mixin that provides functionality to manage
+/// EckoControllers within the Ecko state management framework
 ///
-/// This mixin allows for creating, retrieving, and disposing of EchoController
+/// This mixin allows for creating, retrieving, and disposing of EckoController
 /// instances.
 ///
 /// It ensures that each controller is uniquely identified and properly managed
 /// throughout its lifecycle.
 ///
-mixin EchoControllerManagerMixin {
+mixin EckoControllerManagerMixin {
   ///
   /// A private instance of the Paw logger for logging purposes.
   ///
-  final EchoLogger _logger = EchoLogger();
+  final EckoLogger _logger = EckoLogger();
 
   ///
-  /// A map to store the active EchoController instances, keyed by their GlobalKey.
+  /// A map to store the active EckoController instances, keyed by their GlobalKey.
   ///
-  final Map<int, EchoController> _controllers = {};
+  final Map<int, EckoController> _controllers = {};
 
   ///
   /// Puts (or retrieves) a controller of type [T] into the controllers map.
@@ -37,14 +37,14 @@ mixin EchoControllerManagerMixin {
   ///
   /// Example:
   /// ```
-  /// class MyController extends EchoController {}
+  /// class MyController extends EckoController {}
   ///
-  /// final manager = EchoControllerManagerMixin();
+  /// final manager = EckoControllerManagerMixin();
   /// final myController = manager.put(() => MyController());
   /// ```
   ///
-  T put<T extends EchoController>(T Function() create) {
-    final key = EchoHashUtil.generateTypeHash<T>();
+  T put<T extends EckoController>(T Function() create) {
+    final key = EckoHashUtil.generateTypeHash<T>();
 
     var controller = _controllers[key];
 
@@ -79,9 +79,9 @@ mixin EchoControllerManagerMixin {
   ///
   /// Example:
   /// ```
-  /// class MyController extends EchoController {}
+  /// class MyController extends EckoController {}
   ///
-  /// final manager = EchoControllerManagerMixin();
+  /// final manager = EckoControllerManagerMixin();
   ///
   /// // put your controller on memory
   /// final myController = manager.put(() => MyController());
@@ -91,7 +91,7 @@ mixin EchoControllerManagerMixin {
   /// ```
   ///
   bool delete<T>() {
-    final key = EchoHashUtil.generateTypeHash<T>();
+    final key = EckoHashUtil.generateTypeHash<T>();
     final ctrl = _controllers[key];
 
     if (ctrl != null) {

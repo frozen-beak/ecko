@@ -1,12 +1,12 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:echo/src/utils/graph.util.echo.dart';
+import 'package:ecko/src/utils/graph.util.ecko.dart';
 
 void main() {
-  group('[Utils] EchoGraph Tests', () {
-    late EchoGraph<MockStore> graph;
+  group('[Utils] EckoGraph Tests', () {
+    late EckoGraph<MockStore> graph;
 
     setUpAll(() {
-      graph = EchoGraph<MockStore>();
+      graph = EckoGraph<MockStore>();
     });
 
     setUp(() {

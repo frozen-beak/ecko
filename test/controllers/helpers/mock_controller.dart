@@ -1,9 +1,9 @@
-import 'package:echo/src/controllers/interface.controller.echo.dart';
+import 'package:ecko/src/controllers/interface.controller.ecko.dart';
 
 ///
-/// A concrete implementation of EchoController for testing purposes.
+/// A concrete implementation of EckoController for testing purposes.
 ///
-class TestEchoController extends EchoController {
+class TestEckoController extends EckoController {
   bool isInitialized = false;
   bool isDisposed = false;
 

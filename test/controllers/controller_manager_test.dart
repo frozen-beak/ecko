@@ -1,53 +1,53 @@
-import 'package:echo/src/utils/logger.util.echo.dart';
+import 'package:ecko/src/utils/logger.util.ecko.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:echo/src/controllers/manager.controller.echo.dart';
+import 'package:ecko/src/controllers/manager.controller.ecko.dart';
 
 import 'helpers/mock_controller.dart';
 
 // Test class using the mixin
-class TestEchoControllerManager with EchoControllerManagerMixin {}
+class TestEckoControllerManager with EckoControllerManagerMixin {}
 
 void main() {
-  group('EchoControllerManagerMixin Tests', () {
-    late TestEchoControllerManager manager;
+  group('EckoControllerManagerMixin Tests', () {
+    late TestEckoControllerManager manager;
 
     setUp(() {
-      // init the [EchoLogger]
-      EchoLogger.init(shouldPrintLogs: false);
+      // init the [EckoLogger]
+      EckoLogger.init(shouldPrintLogs: false);
 
-      manager = TestEchoControllerManager();
+      manager = TestEckoControllerManager();
     });
 
     test('put method should create and return a new controller', () {
-      final controller = manager.put(() => TestEchoController());
+      final controller = manager.put(() => TestEckoController());
 
-      expect(controller, isA<TestEchoController>());
+      expect(controller, isA<TestEckoController>());
     });
 
     test(
       'put method should call the `onInit()` for the initialised controller',
       () {
-        final controller = manager.put(() => TestEchoController());
+        final controller = manager.put(() => TestEckoController());
 
         expect(controller.isInitialized, isTrue);
       },
     );
 
     test('put method should return existing controller if already created', () {
-      final controller1 = manager.put(() => TestEchoController());
-      final controller2 = manager.put(() => TestEchoController());
+      final controller1 = manager.put(() => TestEckoController());
+      final controller2 = manager.put(() => TestEckoController());
 
       expect(controller1.hashCode, equals(controller2.hashCode));
     });
 
     test('delete method should remove the controller', () {
-      manager.put(() => TestEchoController());
+      manager.put(() => TestEckoController());
 
-      expect(manager.delete<TestEchoController>(), isTrue);
+      expect(manager.delete<TestEckoController>(), isTrue);
     });
 
     test('delete method should handle non-existent controller', () {
-      expect(manager.delete<TestEchoController>(), isFalse);
+      expect(manager.delete<TestEckoController>(), isFalse);
     });
   });
 }

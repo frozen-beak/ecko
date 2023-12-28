@@ -1,9 +1,9 @@
-import '../../utils/graph.util.echo.dart';
-import '../../utils/logger.util.echo.dart';
-import 'interface.store.echo.dart';
+import '../../utils/graph.util.ecko.dart';
+import '../../utils/logger.util.ecko.dart';
+import 'interface.store.ecko.dart';
 
 ///
-/// A singleton class for managing interdependencies between stores in echo
+/// A singleton class for managing interdependencies between stores in ecko
 ///
 /// This manager uses a directed graph to represent dependencies between different stores.
 /// It allows for the creation and deletion of root nodes (stores) in the graph and
@@ -13,7 +13,7 @@ class StoreManager {
   ///
   /// Instance of logger to help logging useful message to the dev
   ///
-  final _logger = EchoLogger();
+  final _logger = EckoLogger();
 
   ///
   /// Private, Static & Singleton instance of [StoreManager]
@@ -33,7 +33,7 @@ class StoreManager {
   factory StoreManager() {
     if (_instance == null) {
       throw Exception(
-        "`Echo` is not yet initialised, initialise it with `Echo.init()`",
+        "`Ecko` is not yet initialised, initialise it with `Ecko.init()`",
       );
     }
 
@@ -47,7 +47,7 @@ class StoreManager {
   ///
   /// Example:
   /// ```
-  /// EchoStoreManager.init();
+  /// EckoStoreManager.init();
   /// ```
   ///
   static StoreManager init() {
@@ -60,7 +60,7 @@ class StoreManager {
   /// Private instance of directed graph to help manage inter-dependencies
   /// between stores
   ///
-  final EchoGraph _graph = EchoGraph();
+  final EckoGraph _graph = EckoGraph();
 
   ///
   /// Creates a root node (store) in the graph.
@@ -73,7 +73,7 @@ class StoreManager {
   /// ```
   /// final store = ValueStore();
   ///
-  /// EchoStoreManager().createRootNode(store);
+  /// EckoStoreManager().createRootNode(store);
   /// ```
   ///
   bool createRootNode(StoreInterface root) {
@@ -91,7 +91,7 @@ class StoreManager {
   /// ```
   /// final store = ValueStore();
   ///
-  /// EchoStoreManager().deleteRoot(store);
+  /// EckoStoreManager().deleteRoot(store);
   /// ```
   ///
   bool deleteRoot(StoreInterface root) {
@@ -114,7 +114,7 @@ class StoreManager {
   /// final dependentStore = ValueStore();
   ///
   /// // Now, dependentStore depends on rootStore
-  /// EchoStoreManager().addDependency(rootStore, dependentStore);
+  /// EckoStoreManager().addDependency(rootStore, dependentStore);
   /// ```
   ///
   bool? addDependency(StoreInterface root, StoreInterface node) {
@@ -162,7 +162,7 @@ class StoreManager {
   /// final dependentStore = ValueStore();
   ///
   /// // Dependency of dependentStore to rootStore is removed
-  /// EchoStoreManager().removeDependency(rootStore, dependentStore);
+  /// EckoStoreManager().removeDependency(rootStore, dependentStore);
   /// ```
   ///
   bool? removeDependency(StoreInterface root, StoreInterface node) {
@@ -215,7 +215,7 @@ class StoreManager {
   /// final store = ValueStore();
   ///
   /// // Assuming store has dependencies that need to be updated.
-  /// EchoStoreManager().updateStoreNodes(store);
+  /// EckoStoreManager().updateStoreNodes(store);
   /// ```
   ///
   Set<dynamic>? updateStoreNodes(StoreInterface root) {
@@ -246,7 +246,7 @@ class StoreManager {
   ///
   /// Example:
   /// ```
-  /// EchoStoreManager().clearStoreGraph();
+  /// EckoStoreManager().clearStoreGraph();
   /// ```
   ///
   void clearStoreGraph() {
