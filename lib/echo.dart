@@ -1,3 +1,0 @@
-library echo;
-
-class Echo {}
