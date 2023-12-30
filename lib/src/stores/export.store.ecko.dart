@@ -1,9 +1,4 @@
 ///
-/// Library to group [EckoStore] exports
-///
-library ecko;
-
-///
 /// Store builder to be used to listen to store state changes
 ///
 export 'store_builder.store.ecko.dart';

@@ -1,4 +1,3 @@
-import 'controllers/manager.controller.ecko.dart';
 import 'stores/core/manager.store.ecko.dart';
 import 'utils/logger.util.ecko.dart';
 
@@ -25,7 +24,7 @@ import 'utils/logger.util.ecko.dart';
 /// }
 /// ```
 ///
-class Ecko with EckoControllerManagerMixin {
+class Ecko {
   ///
   /// Determines whether Ecko should enable logging.
   ///

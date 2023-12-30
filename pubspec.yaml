@@ -1,5 +1,5 @@
 name: ecko
-description: Graph-based Flutter state management with built-in controller mechanism for MVC and MVVM support
+description: Ecko is a graph-based state management library for Flutter applications
 version: 0.0.1
 repository: https://github.com/AdityaMotale/ecko
 issue_tracker: https://github.com/AdityaMotale/ecko/issues

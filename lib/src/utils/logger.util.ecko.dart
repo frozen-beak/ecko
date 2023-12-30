@@ -49,7 +49,7 @@ class EckoLogger extends PawInterface {
     // throws an exception if [_instance] is `null`
     if (_instance == null) {
       throw Exception(
-        "EckoLogger has not been initialised yet! Initialise it by executing `EckoLogger.init()`",
+        "`Ecko` is not yet initialised. Initialise it with `Ecko.init()`.",
       );
     }
 
